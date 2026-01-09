@@ -4,7 +4,7 @@
 
 
 
-
+"Version inicial"
 
 import random
 import csv
@@ -106,3 +106,4 @@ def graficar_dispersio():
     plt.show()
 
 graficar_dispersio() 
+

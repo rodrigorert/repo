@@ -1,0 +1,1 @@
+En este ejemplo vimos cómo intercalar comentarios para planificar, cómo el autocompletado pudo acelerar cosas como manejo de excepciones o conteos, y cómo podrías consultar al chat para dilemas puntuales (como la separación de palabras con o sin regex).
