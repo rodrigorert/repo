@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+            margin: 0;
+            color: #333;
+        }
+
+        /* La tarjeta principal */
+        .contenedor {
+            background-color: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo de la lista */
+        ul {
+            list-style-type: none; /* Quita los puntos negros */
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between; /* Texto a la izq, botón a la der */
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        li:hover {
+            background-color: #fafafa;
+        }
+
+        /* Tarea completada */
+        .completada {
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        /* Botón de completar */
+        .btn-check {
+            text-decoration: none;
+            color: #27ae60;
+            font-weight: bold;
+            border: 1px solid #27ae60;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        .btn-check:hover {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        /* Formulario de agregar */
+        form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f2f5;
+        }
+
+        input[type="text"] {
+            flex-grow: 1; /* Ocupa todo el espacio posible */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .estado {
+            font-size: 0.8rem;
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h1>📋 Mis Tareas</h1>
+
+        <ul>
+            {% for tarea in tareas %}
+                <li>
+                    <span class="{% if tarea['hecho'] %}completada{% endif %}">
+                        {{ tarea['texto'] }}
+                    </span>
+
+                    {% if tarea['hecho'] %}
+                        <span class="estado">✓ Hecho</span>
+                    {% else %}
+                        <a href="/completar/{{ tarea['id'] }}" class="btn-check">Completar</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            
+            {% if not tareas %}
+                <li style="text-align: center; color: #999; justify-content: center;">
+                    No hay tareas pendientes 🎉
+                </li>
+            {% endif %}
+        </ul>
+
+        <form action="/agregar" method="post">
+            <input type="text" name="texto_tarea" placeholder="¿Qué tienes que hacer hoy?" required autocomplete="off">
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+
+</body>
+</html>

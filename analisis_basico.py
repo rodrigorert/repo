@@ -107,3 +107,4 @@ def graficar_dispersio():
 
 graficar_dispersio() 
 
+
